@@ -11,4 +11,6 @@ figures = Table('figures', metadata_obj,
                 Column('colour', String, nullable=False)
                 )
 
+conn = engine.connect()
+
 metadata_obj.create_all(engine)
