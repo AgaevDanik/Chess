@@ -1,6 +1,11 @@
+import os
+
+
 from sqlalchemy import Table, Column, Integer, String, MetaData, create_engine
 
-engine = create_engine('sqlite:///tmp/chess.db/', echo=True)
+engine = create_engine('sqlite:///tmp/chess.db',
+                       echo=True,
+                       )
 
 metadata_obj = MetaData()
 
