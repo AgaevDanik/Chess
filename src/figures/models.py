@@ -1,5 +1,6 @@
 from flask import jsonify
-from controller import check_field
+from .controller import insert_figure, delete_all
+
 
 def field_translation(obj):
     translator = {
@@ -16,10 +17,11 @@ def field_translation(obj):
     obj.field = translator[obj.field[0]] + obj.field[1]
 
 
+
 class Figure:
     def __init__(self, field: str, colour: str):
-        self.field = field
-        self.colour = colour
+        self.field = field.upper()
+        self.colour = colour.upper()
         self.name = self.__class__.__name__.lower()
         field_translation(self)
 
@@ -30,17 +32,14 @@ class Figure:
 
         result = []
 
-        for i in moves_list:
-            if int(i.field[0]) > 8 or int(i.field[1]) > 8:
-                continue
-            elif check_field(self.field):
-                continue
-            else:
-                result.append(i)
+        # for i in moves_list:
+        #
+        #     if int(i[0]) > 8 or int(i[1]) > 8:
+        #         continue
+        #     if check_field(self.field):
+        #         result.append(i)
+
         return result
-
-
-
 
 
 class Pawn(Figure):
@@ -60,7 +59,6 @@ class Pawn(Figure):
             result.append(self.field[0] + str(int(self.field) + 1))
 
         return self.validate_moves(result)
-
 
 
 class Knight(Figure):
@@ -83,4 +81,5 @@ class King(Figure):
     pass
 
 
-if __name__ == '__main__':
+def test():
+    a = Pawn('h4', 'b')
